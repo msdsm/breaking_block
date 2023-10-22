@@ -16,40 +16,39 @@
 - Ball
 - Player
 - Blocks
-        - Block
-        - Block(1)
-        - Block(2)
-        - Block(3)
-        - Block(4)
-        - Block(5)
+    - Block
+    - Block(2)
+    - Block(3)
+    - Block(4)
+    - Block(5)
 - Canvas
-        - Text
+    - Text
 - EventSystem
 
 
 ## 各Assetsの説明
 - `Materials`
-        - 各マテリアルをまとめた
-        - 主に色を変更するために使用した
+    - 各マテリアルをまとめた
+    - 主に色を変更するために使用した
 - `PhysicsMaterials`
-        - 物理演算のためのマテリアルをまとめた
+    - 物理演算のためのマテリアルをまとめた
 - `Prefabs`
-        - ブロックをプレハブにしたもの
+    - ブロックをプレハブにしたもの
 - `Scripts`
-        - C#をここに保存した
-        - 以下が各ファイルの適用先である
-                - `Ball.cs`:Ball
-                - `Block.cs`:Block
-                - `GameClear.cs`:Blocks
-                - `GameOver.cs`:Wall Bottom
-                - `Player.cs`:Player
-                - `ResetText.cs`:Text
+    - C#をここに保存した
+    - 以下が各ファイルの適用先である
+        - `Ball.cs`:Ball
+        - `Block.cs`:Block
+        - `GameClear.cs`:Blocks
+        - `GameOver.cs`:Wall Bottom
+        - `Player.cs`:Player
+        - `ResetText.cs`:Text
 
 ## 今後やること
 - 作って学べるUnity本格入門を読み終える
 - スマブラみたいなやつ作ってみる
 - `Input`についての勉強
-        - https://hu-gsd.com/lecture/unity-input-key/ 
+    - https://hu-gsd.com/lecture/unity-input-key/ 
 - ブラウザ上にビルドしてみる
 
 
@@ -65,144 +64,144 @@
     - `source .bashrc`
     - これによって`subl`コマンドで開けるようになる
 - 本読み進めながらUnity触ってみる
-        - 1章:導入
-        - 2章:跳ね返るボール
-                - planeに画像を挿入する際に繰り返しにできなかった
-        - 3章:C#
-                - 基本的な文法について学んだ
-                - 下の自分用メモに残した
-                - いろいろ実際に手を動かして書いてみないとよくわからないと思った
-        - 4章:開発の基本
-                - 特に内容ない
+    - 1章:導入
+    - 2章:跳ね返るボール
+        - planeに画像を挿入する際に繰り返しにできなかった
+    - 3章:C#
+        - 基本的な文法について学んだ
+        - 下の自分用メモに残した
+        - いろいろ実際に手を動かして書いてみないとよくわからないと思った
+    - 4章:開発の基本
+        - 特に内容ない
 
 ### 2023/10/17
 - 実際にブロック崩し作る
 - 2Dで新規プロジェクト作成
-        - Desktopに`block`という名前で保存
+    - Desktopに`block`という名前で保存
 - Assets/ScenesをPlayという名前に変更
 - 以下Playでの処理
-        - Main Cameraの設定
-                - TransformコンポーネントのPositionを(0,0,-20)に変更
-                - Cameraコンポーネントのsizeを12に変更
-                - CameraコンポーネントのBackgroundから背景色変更
+    - Main Cameraの設定
+        - TransformコンポーネントのPositionを(0,0,-20)に変更
+        - Cameraコンポーネントのsizeを12に変更
+        - CameraコンポーネントのBackgroundから背景色変更
 
-        - 壁の作成
-                - 3D ObjectのCubeを4つ作成
-                - 座標を計算してPositionとScaleを変更
-                - AssetsにMaterialsフォルダを作成
-                - Materialsフォルダ内にWallマテリアルを作成
-                        - Shederの箇所をUnlit/Colorに変更
-                        - 4つの壁に適用
-                                - 各オブジェクトをクリックしてInspectorで選択
-                                - または、WallマテリアルをHierarchyビューにドラッグアンドドロップしてもできる
-        - ボールの作成
-                - 3D ObjectのSphereを作成
-                        - PositionとScaleを変更
-                        - 壁と同様にBallマテリアルをAssets/Materialsに作成して適用(色を自由に決めるため) 
-                - Rigidbodyを設定する
-                        - Inspectorビューの下にあるAdd ComponentからPhysics/Rigidbodyを選択
-                                - Drag:0
-                                - Angular Drag:0
-                                - Use Gravity:off
-                                - Constraints Freeze position z:on(z方向に動かさないため)
-                                - Constraints Freeze rotation x,y,z:on(回転させないため)
-                - Physics Materialを設定する
-                        - Assets/PhysicsMaterialsにPhysics Materialを作成(NoFrictionという名前)
-                                - Dynamic Friction:0
-                                - Static Friction:0
-                                - Bounciness:1
-                                - Friction Combine:Minimum(任意のobjectとの衝突で摩擦を発生させないため)
-                                - Bounce Combine:Maximum(任意のobjectの衝突で減衰せずに反発させるため)
-                        - BallのSpher ColliderのMaterialに設定
-                - スクリプトの作成
-                        - Assets/Scriptsを作成して、その中に`Ball.cs`を作成
-                                - Ball.csの中身の理解が浅い。Unityの本を最後までやってC#の理解深める
-                        - 45度斜めに進むように速度設定
-                        - Ballに適用
-        - プレイヤーの作成
-                - Cubeを作成
-                        - Position,Scale変更
-                - Rigidbodyを設定
-                        - Drag,Angular Drag:0
-                        - Use Gravity:off
-                        - Constraints Freeze position y,z:on(x方向のみ動かす)
-                        - Constraints Freeze rotation x,y,z:on(回転させない)
-                        - Mass:100(ボールを跳ね返すために重くする)
-                - スクリプトの作成
-                        - `Player.cs`をAssets/Scriptsに作成
-                        - `Update()`で毎フレームごとに入力受け取って動かすようにする
-        - ブロックの作成
-                - Cubeを作成
-                        - Position,Scale調整
-                - プレハブにする
-                        - Assets/Prefabsを作成
-                        - Prefabsにblockを作成してドラッグアンドドロップで複製
-                                - Prefabsのblockを変更すればblock全部変更できて便利
-                - スクリプトの作成
-                        - `Block.cs`を作成
-                        - `OnCollisionEnter()`で衝突を検出した際に`Destroy`でゲームオブジェクトを削除する
-        - ゲームオーバーの実装
-                - `GameOver.cs`を作成してWall Bottomに適用
-                        - 衝突を検知したら衝突した相手のオブジェクトを削除する
-        - ゲームクリアの実装
-                - Blocksというempty objectを作成
-                - その中にBlock全部入れる
-                - Blocksに`GameClear.cs`を適用
-                        - `Transform.childCount`で子オブジェクトの個数をフレームごとにcheck
-                        - 0になったらゲーム終了
-                                - Time.timeScaleを0にする
-        - テキスト表示
-                - UI/Textを作成(Legacy)
-                        - Canvas/Textが作成される
-                        - EventSystemが作成される
-                                -  ナニコレ？
-                        - Canvasの設定
-                                - Render ModeをScreen Space-Overlayに変更
-                                        - Screen Space - Overlay : 常に画面手前に描画
-                                        - Screen Space - Camera : 指定したカメラの前に描画
-                                        - World Space : シーン内の平面オブジェクトであるかのように描画
-                                - UI Scale ModeをScreen With Screen Sizeに変更
-                        - Textの設定
-                                - 位置調整、色調整
-                                - `ResetText.cs`を適用
-                                        - 文字列を空で初期化
-                        - ゲームオーバー時の設定
-                                - `GameOver.cs`を編集
-                                        - `public Text`をグローバルフィールドとして宣言してInspectorから設定できるようにする
-                                        - `OnCollisionEnter(Collision collision)`内でテキスト内容を変更
-                        - ゲームクリア時の設定
-                                - `GameClear.cs`を編集
-                                        - `GameOver.cs`とは違う方法でやってみた
-                                        - `GameObject.Find(path文字列)`で`Text`オブジェクトを取得(path:Canvas/Text)
-                                        - `GameObject.GetComponent<Text>()`でTextコンポーネント取得
-                                        - `GameObject.GetComponent<Text>().text`で文字列変更
+    - 壁の作成
+        - 3D ObjectのCubeを4つ作成
+        - 座標を計算してPositionとScaleを変更
+        - AssetsにMaterialsフォルダを作成
+        - Materialsフォルダ内にWallマテリアルを作成
+            - Shederの箇所をUnlit/Colorに変更
+            - 4つの壁に適用
+                - 各オブジェクトをクリックしてInspectorで選択
+                - または、WallマテリアルをHierarchyビューにドラッグアンドドロップしてもできる
+    - ボールの作成
+        - 3D ObjectのSphereを作成
+            - PositionとScaleを変更
+            - 壁と同様にBallマテリアルをAssets/Materialsに作成して適用(色を自由に決めるため) 
+        - Rigidbodyを設定する
+            - Inspectorビューの下にあるAdd ComponentからPhysics/Rigidbodyを選択
+                - Drag:0
+                - Angular Drag:0
+                - Use Gravity:off
+                - Constraints Freeze position z:on(z方向に動かさないため)
+                - Constraints Freeze rotation x,y,z:on(回転させないため)
+        - Physics Materialを設定する
+            - Assets/PhysicsMaterialsにPhysics Materialを作成(NoFrictionという名前)
+                - Dynamic Friction:0
+                - Static Friction:0
+                - Bounciness:1
+                - Friction Combine:Minimum(任意のobjectとの衝突で摩擦を発生させないため)
+                - Bounce Combine:Maximum(任意のobjectの衝突で減衰せずに反発させるため)
+            - BallのSpher ColliderのMaterialに設定
+        - スクリプトの作成
+            - Assets/Scriptsを作成して、その中に`Ball.cs`を作成
+                - Ball.csの中身の理解が浅い。Unityの本を最後までやってC#の理解深める
+            - 45度斜めに進むように速度設定
+            - Ballに適用
+    - プレイヤーの作成
+        - Cubeを作成
+            - Position,Scale変更
+        - Rigidbodyを設定
+            - Drag,Angular Drag:0
+            - Use Gravity:off
+            - Constraints Freeze position y,z:on(x方向のみ動かす)
+            - Constraints Freeze rotation x,y,z:on(回転させない)
+            - Mass:100(ボールを跳ね返すために重くする)
+        - スクリプトの作成
+            - `Player.cs`をAssets/Scriptsに作成
+            - `Update()`で毎フレームごとに入力受け取って動かすようにする
+    - ブロックの作成
+        - Cubeを作成
+            - Position,Scale調整
+        - プレハブにする
+            - Assets/Prefabsを作成
+            - Prefabsにblockを作成してドラッグアンドドロップで複製
+                - Prefabsのblockを変更すればblock全部変更できて便利
+        - スクリプトの作成
+            - `Block.cs`を作成
+            - `OnCollisionEnter()`で衝突を検出した際に`Destroy`でゲームオブジェクトを削除する
+    - ゲームオーバーの実装
+        - `GameOver.cs`を作成してWall Bottomに適用
+            - 衝突を検知したら衝突した相手のオブジェクトを削除する
+    - ゲームクリアの実装
+        - Blocksというempty objectを作成
+        - その中にBlock全部入れる
+        - Blocksに`GameClear.cs`を適用
+            - `Transform.childCount`で子オブジェクトの個数をフレームごとにcheck
+            - 0になったらゲーム終了
+                - Time.timeScaleを0にする
+    - テキスト表示
+        - UI/Textを作成(Legacy)
+            - Canvas/Textが作成される
+            - EventSystemが作成される
+                -  ナニコレ？
+            - Canvasの設定
+                - Render ModeをScreen Space-Overlayに変更
+                    - Screen Space - Overlay : 常に画面手前に描画
+                    - Screen Space - Camera : 指定したカメラの前に描画
+                    - World Space : シーン内の平面オブジェクトであるかのように描画
+                - UI Scale ModeをScreen With Screen Sizeに変更
+            - Textの設定
+                - 位置調整、色調整
+                - `ResetText.cs`を適用
+                    - 文字列を空で初期化
+            - ゲームオーバー時の設定
+                - `GameOver.cs`を編集
+                    - `public Text`をグローバルフィールドとして宣言してInspectorから設定できるようにする
+                    - `OnCollisionEnter(Collision collision)`内でテキスト内容を変更
+            - ゲームクリア時の設定
+                - `GameClear.cs`を編集
+                    - `GameOver.cs`とは違う方法でやってみた
+                    - `GameObject.Find(path文字列)`で`Text`オブジェクトを取得(path:Canvas/Text)
+                    - `GameObject.GetComponent<Text>()`でTextコンポーネント取得
+                    - `GameObject.GetComponent<Text>().text`で文字列変更
 
 ### 2023/10/22
 - リトライの実装
-        - ゲームオーバー時にやり直せるようにする
-                - `GameOver.cs`を編集
-                        - `Input.GetButtonDown("Submit)`でキー入力を受け取る
-                        - ゲームオーバー時にsceneをloadするようにする
-                - File->Build Settingswを開いてPlayシーンをScenes In Buildにドラッグアンドドロップで追加
-        - ゲームクリア時にやり直せるようにする
-                - `GameClear.cs`を編集
+    - ゲームオーバー時にやり直せるようにする
+        - `GameOver.cs`を編集
+            - `Input.GetButtonDown("Submit)`でキー入力を受け取る
+            - ゲームオーバー時にsceneをloadするようにする
+        - File->Build Settingswを開いてPlayシーンをScenes In Buildにドラッグアンドドロップで追加
+    - ゲームクリア時にやり直せるようにする
+        - `GameClear.cs`を編集
 
 - ボールの改善
-        - `Ball.cs`を編集
-                - スピード調整
-                        - 最小値と最大値を設定できるようにする
-                        - Updateで毎フレームごとにスピードチェック
-                - 反射の方向調整
-                        - 左から来たときは左に反射
-                        - 右から来たときは右に反射
-                        - Playerと衝突したときを検知して速度ベクトルを変更する
-        - プレイヤーオブジェクトにplayerタグを追加
-                - Inspectorビューから変更可能
+    - `Ball.cs`を編集
+        - スピード調整
+            - 最小値と最大値を設定できるようにする
+            - Updateで毎フレームごとにスピードチェック
+        - 反射の方向調整
+            - 左から来たときは左に反射
+            - 右から来たときは右に反射
+            - Playerと衝突したときを検知して速度ベクトルを変更する
+    - プレイヤーオブジェクトにplayerタグを追加
+         - Inspectorビューから変更可能
 
 ### 2023/10/23
 - Unity本
 - `Input`についての勉強
-        - https://hu-gsd.com/lecture/unity-input-key/ 
+    - https://hu-gsd.com/lecture/unity-input-key/ 
 - ブラウザ上にビルドしてみる
 
 ## 自分用メモ
@@ -215,18 +214,18 @@
 #### Rigidbody
 - ComponentのPhysicsの中にある
 - プロパティは以下
-        - Mass:オブジェクトの重さ(kg)
-        - Drag:オブジェクトの空気抵抗
-        - Angular Drag:回転に対する空気抵抗
-        - Use Gravity:重力を適用するかどうか
-        - Is Kinematic:固定されたものに使用する。スクリプトで動かさない限り動かなくなる
-        - Interpolate・Extrapolate:描画と物理演算に生じるズレを軽減する
-        - Collisions Detection:壁などを貫通しなくなる
-                - Continuous:動かないオブジェクトと衝突する場合
-                - Continuous Dynamic:動くオブジェクトと衝突する場合
-        - Constraints:制御
-                - Freeze Position:移動しなくなる
-                - Freeze Rotation:回転しなくなる
+    - Mass:オブジェクトの重さ(kg)
+    - Drag:オブジェクトの空気抵抗
+    - Angular Drag:回転に対する空気抵抗
+    - Use Gravity:重力を適用するかどうか
+    - Is Kinematic:固定されたものに使用する。スクリプトで動かさない限り動かなくなる
+    - Interpolate・Extrapolate:描画と物理演算に生じるズレを軽減する
+    - Collisions Detection:壁などを貫通しなくなる
+        - Continuous:動かないオブジェクトと衝突する場合
+        - Continuous Dynamic:動くオブジェクトと衝突する場合
+    - Constraints:制御
+        - Freeze Position:移動しなくなる
+        - Freeze Rotation:回転しなくなる
 
 #### Physics Material
 - Assets内にある
